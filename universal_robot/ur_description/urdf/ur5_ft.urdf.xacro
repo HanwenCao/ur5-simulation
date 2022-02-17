@@ -379,9 +379,9 @@
     </joint>
     
 
-		<!-- Newly added contents -->
-		<!-- DRAM -->
-		<!-->
+    <!-- Newly added contents -->
+    <!-- DRAM -->
+    <!-->
   	<!link name="${prefix}dram">
   		<visual>
         <geometry>
@@ -402,10 +402,10 @@
     </joint>
     <-->
     
-		<!-- Gazebo -->
-		<gazebo>
+	<!-- Gazebo -->
+	<gazebo>
       <link name='dram'>
-        <pose>1 0.13 0.1 0 1.5707 1.5707</pose>
+        <pose>0.8145 ${wrist_3_length+0.1088+0.05} 0.0736 0 1.57 -1.57</pose>
         <inertial>
           <pose>-0.022 0.0203 0.02917 0 0 0</pose>
           <mass>0.00001</mass>
@@ -442,6 +442,17 @@
       <joint name='dram_joint' type='fixed'>
         <child>dram</child>
         <parent>wrist_3_link</parent>
+        
+        <sensor name='dram_joint_force_torque' type="force_torque">
+          <always_on>true</always_on>
+		      <update_rate>20.0</update_rate>
+		      <visualize>true</visualize>
+		      <force_torque>
+		        <frame>sensor</frame>  <!-- https://gazebosim.org/tutorials?tut=force_torque_sensor&cat=sensors -->
+		        <measure_direction>child_to_parent</measure_direction>
+		      </force_torque>
+		    </sensor>
+		    
       </joint>
     </gazebo>
     
